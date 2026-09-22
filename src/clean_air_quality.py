@@ -1,3 +1,4 @@
+from pathlib import Path
 import requests
 import pandas as pd
 
@@ -71,3 +72,16 @@ print(air_df.duplicated().sum())
 
 print("\nSummary statistics:")
 print(air_df[["pm2_5", "pm10"]].describe())
+
+# ---------------------------------------------------------
+# STEP 4: Save cleaned dataset
+# ---------------------------------------------------------
+
+BASE_DIR = Path(__file__).resolve().parents[1]
+
+output_path = BASE_DIR / "data" / "processed" / "air_quality_clean.csv"
+
+air_df.to_csv(output_path, index=False)
+
+print(f"\nCleaned dataset saved to:")
+print(output_path)  
